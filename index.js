@@ -3,10 +3,10 @@
 
 const STORE = {
   items: [
-    {name: 'apples', checked: false},
-    {name: 'oranges', checked: false},
-    {name: 'milk', checked: true},
-    {name: 'bread', checked: false}
+    { name: 'apples', checked: false },
+    { name: 'oranges', checked: false },
+    { name: 'milk', checked: true },
+    { name: 'bread', checked: false }
   ],
   hideCheckedItems: false
 };
@@ -31,7 +31,7 @@ function generateShoppingItemsString(shoppingList) {
   console.log('Generating shopping list element');
 
   const items = shoppingList.map((item, index) => generateItemElement(item, index));
-  
+
   return items.join('');
 }
 
@@ -41,10 +41,10 @@ function renderShoppingList() {
   console.log('`renderShoppingList` ran');
   let filteredItems = STORE.items;
   if (STORE.hideCheckedItems === true) {
-    filteredItems = STORE.items.filter(function(item) {
+    filteredItems = STORE.items.filter(function (item) {
       return item.checked === false;
     });
-  
+
   }
   const shoppingListItemsString = generateShoppingItemsString(filteredItems);
   // insert that HTML into the DOM
@@ -53,11 +53,11 @@ function renderShoppingList() {
 
 function addItemToShoppingList(itemName) {
   console.log(`Adding "${itemName}" to shopping list`);
-  STORE.items.push({name: itemName, checked: false});
+  STORE.items.push({ name: itemName, checked: false });
 }
 
 function handleNewItemSubmit() {
-  $('#js-shopping-list-form').submit(function(event) {
+  $('#js-shopping-list-form').submit(function (event) {
     event.preventDefault();
     console.log('`handleNewItemSubmit` ran');
     const newItemName = $('.js-shopping-list-entry').val();
@@ -96,7 +96,7 @@ function handleItemCheckClicked() {
 // name says it all. responsible for deleting a list item.
 function deleteListItem(itemIndex) {
   console.log(`Deleting item at index  ${STORE.item} from shopping list`);
-  STORE.items.splice(itemIndex,1);
+  
   // as with `addItemToShoppingLIst`, this function also has the side effect of
   // mutating the global STORE value.
   //
@@ -113,6 +113,8 @@ function handleDeleteItemClicked() {
   $('.js-shopping-list').on('click', '.js-item-delete', event => {
     // get the index of the item in STORE
     const itemIndex = getItemIndexFromElement(event.target);
+
+
     // delete the item
     deleteListItem(itemIndex);
     // render the updated shopping list
